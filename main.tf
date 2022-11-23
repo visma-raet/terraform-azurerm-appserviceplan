@@ -28,25 +28,14 @@ resource "azurerm_resource_group" "rg" {
 # App Service Plan Creation or selection
 #---------------------------------------------------------
 
-resource "azurerm_app_service_plan" "main" {
+resource "azurerm_service_plan" "main" {
   name                = format("%s-%s", var.prefix, lower(replace(var.name, "/[[:^alnum:]]/", "")))
   location            = local.location
   resource_group_name = local.resource_group_name
-  kind                = var.kind
-  reserved            = var.kind == "Windows" ? false : (var.kind == "Linux" ? true : var.reserved)
-
-  sku {
-    tier = var.tier
-    size = var.size
-  }
+  os_type             = var.kind
+  sku_name            = var.size
 
   tags = merge({ "ResourceName" = format("%s-%s", var.prefix, lower(replace(var.name, "/[[:^alnum:]]/", ""))) }, var.tags, )
-
-  lifecycle {
-    ignore_changes = [
-      tags
-    ]
-  }
 }
 
 provider "azurerm" {

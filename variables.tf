@@ -35,12 +35,6 @@ variable "reserved" {
   default     = "false"
 }
 
-variable "tier" {
-  description = "(Required) Specifies the plan's pricing tier."
-  type        = string
-  default     = "Basic"
-}
-
 variable "size" {
   description = "(Required) Specifies the plan's instance size."
   type        = string
