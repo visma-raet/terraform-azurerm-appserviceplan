@@ -1,5 +1,5 @@
 variable "name" {
-  description = "Name of Azure Kubernetes service."
+  description = "Name of appservice plan."
 }
 
 variable "create_resource_group" {
